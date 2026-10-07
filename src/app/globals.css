@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09090b;
+  --foreground: #fafafa;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -12,15 +13,116 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  /* A reels-style feed must not rubber-band the whole page. */
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Markdown body used for answers and notes (no typography plugin needed). */
+.md {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: #e4e4e7;
+  overflow-wrap: anywhere;
+}
+.md > * + * {
+  margin-top: 0.85em;
+}
+.md h1,
+.md h2,
+.md h3,
+.md h4 {
+  font-weight: 650;
+  color: #fafafa;
+  line-height: 1.3;
+}
+.md h1 {
+  font-size: 1.5rem;
+}
+.md h2 {
+  font-size: 1.35rem;
+}
+.md h3 {
+  font-size: 1.2rem;
+}
+.md strong {
+  color: #fafafa;
+  font-weight: 650;
+}
+.md ul,
+.md ol {
+  padding-left: 1.3em;
+}
+.md ul {
+  list-style: disc;
+}
+.md ol {
+  list-style: decimal;
+}
+.md li + li {
+  margin-top: 0.3em;
+}
+.md a {
+  color: #a5b4fc;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.md blockquote {
+  border-left: 3px solid #52525b;
+  padding-left: 0.9em;
+  color: #a1a1aa;
+  font-style: italic;
+}
+.md :not(pre) > code {
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 0.35rem;
+  padding: 0.12em 0.4em;
+  font-size: 0.9em;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+.md pre {
+  /* Wrap instead of scrolling sideways: horizontal scroll fights the vertical swipe feed. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border-radius: 0.75rem;
+  background: #0d1117;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  padding: 0.9rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.md pre code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  background: none;
+  padding: 0;
+}
+.md table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.md th,
+.md td {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+.md th {
+  background: rgb(255 255 255 / 0.06);
 }
